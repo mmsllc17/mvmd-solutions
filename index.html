@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MVMD Solutions — Brand Design & Creative Strategy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;500&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F9F8F6;
+      --dark: #141414;
+      --accent: #C4771A;
+      --accent-dark: #A35F10;
+      --radius: 2px;
+      --font-head: 'Outfit', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--dark);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid rgba(20,20,20,0.08);
+      padding: 0 5vw;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-head);
+      font-weight: 500;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      color: var(--dark);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.9rem;
+      color: var(--dark);
+      text-decoration: none;
+      opacity: 0.75;
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover { opacity: 1; }
+
+    .btn-cta {
+      display: inline-block;
+      padding: 0.55rem 1.2rem;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.875rem;
+      text-decoration: none;
+      border-radius: var(--radius);
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-cta:hover { background: var(--accent-dark); }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--dark);
+      border-radius: 1px;
+      transition: 0.3s;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 7rem 5vw 6rem;
+      max-width: 900px;
+    }
+
+    .eyebrow {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.4rem;
+    }
+
+    .hero h1 {
+      font-family: var(--font-head);
+      font-weight: 500;
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.6rem;
+      color: var(--dark);
+    }
+
+    .hero h1 em, h2 em, h3 em, .accent-text {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .hero p {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: rgba(20,20,20,0.7);
+      max-width: 560px;
+      margin-bottom: 2.4rem;
+      line-height: 1.7;
+    }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 0.75rem 1.6rem;
+      border: 1.5px solid var(--dark);
+      color: var(--dark);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.9rem;
+      text-decoration: none;
+      border-radius: var(--radius);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: var(--dark);
+      color: #fff;
+    }
+
+    /* ── LOGOS BAND ── */
+    .logos-band {
+      background: var(--dark);
+      padding: 3rem 5vw;
+      overflow: hidden;
+    }
+
+    .logos-band .label {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 1.5rem;
+    }
+
+    .logos-track {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .logo-pill {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.6);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 999px;
+      padding: 0.35rem 1rem;
+      white-space: nowrap;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .logo-pill:hover {
+      color: #fff;
+      border-color: rgba(255,255,255,0.4);
+    }
+
+    /* ── ABOUT ── */
+    .about {
+      padding: 7rem 5vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6vw;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about-photo {
+      aspect-ratio: 4/5;
+      background: rgba(20,20,20,0.06);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .about-photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(20,20,20,0.25);
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .about-content h2 {
+      font-family: var(--font-head);
+      font-weight: 500;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.6rem;
+    }
+
+    .about-content p {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.975rem;
+      line-height: 1.8;
+      color: rgba(20,20,20,0.72);
+      margin-bottom: 1rem;
+    }
+
+    .about-content .eyebrow { margin-bottom: 1rem; }
+
+    /* ── SERVICES ── */
+    .services {
+      background: var(--accent);
+      padding: 7rem 5vw;
+    }
+
+    .services h2 {
+      font-family: var(--font-head);
+      font-weight: 500;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 3.5rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: rgba(20,20,20,0.18);
+      border-radius: var(--radius);
+      padding: 2.4rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: background 0.25s;
+    }
+
+    .service-card:hover {
+      background: rgba(20,20,20,0.28);
+    }
+
+    .service-card .tier-label {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .service-card h3 {
+      font-family: var(--font-head);
+      font-weight: 500;
+      font-size: 1.4rem;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .service-card .price {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.65);
+    }
+
+    .service-card .desc {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.75);
+      flex: 1;
+    }
+
+    .service-card .service-link {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      margin-top: auto;
+      transition: color 0.2s;
+    }
+
+    .service-card .service-link:hover { color: #fff; }
+
+    /* ── CASE STUDIES ── */
+    .case-studies {
+      padding: 7rem 5vw;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .case-studies h2 {
+      font-family: var(--font-head);
+      font-weight: 500;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      letter-spacing: -0.02em;
+      margin-bottom: 3.5rem;
+    }
+
+    .cases-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .case-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: rgba(20,20,20,0.04);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .case-card.featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .case-img {
+      aspect-ratio: 16/10;
+      background: rgba(20,20,20,0.08);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .case-card.featured .case-img {
+      aspect-ratio: auto;
+    }
+
+    .case-img-placeholder {
+      width: 100%;
+      height: 100%;
+      min-height: 240px;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+    }
+
+    .case-img-placeholder span {
+      font-family: var(--font-head);
+      font-weight: 200;
+      font-size: 4rem;
+      color: rgba(20,20,20,0.08);
+      line-height: 1;
+    }
+
+    .case-body {
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      justify-content: center;
+    }
+
+    .case-eyebrow {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .case-body h3 {
+      font-family: var(--font-head);
+      font-weight: 500;
+      font-size: 1.3rem;
+      line-height: 1.2;
+    }
+
+    .case-body p {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: rgba(20,20,20,0.65);
+    }
+
+    .case-link {
+      display: inline-block;
+      margin-top: 1rem;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.82rem;
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .case-link:hover { opacity: 0.7; }
+
+    .case-img[href] { text-decoration: none; display: block; }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      background: var(--dark);
+      padding: 7rem 5vw;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-family: var(--font-head);
+      font-weight: 500;
+      font-size: clamp(2rem, 4.5vw, 3.6rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 1.4rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-section p {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 1rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.55);
+      max-width: 580px;
+      margin: 0 auto 2.4rem;
+    }
+
+    .btn-cta-lg {
+      display: inline-block;
+      padding: 0.9rem 2rem;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border-radius: var(--radius);
+      transition: background 0.2s;
+      margin-bottom: 1.4rem;
+    }
+
+    .btn-cta-lg:hover { background: var(--accent-dark); }
+
+    .cta-secondary {
+      display: block;
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.35);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .cta-secondary:hover { color: rgba(255,255,255,0.7); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 1.8rem 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer .copyright {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .services-grid { grid-template-columns: 1fr; max-width: 520px; }
+      .about { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-photo { aspect-ratio: 3/2; max-height: 360px; }
+      .cases-grid { grid-template-columns: 1fr; }
+      .case-card.featured { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        border-bottom: 1px solid rgba(20,20,20,0.08);
+        padding: 1.5rem 5vw 2rem;
+        gap: 1.2rem;
+        z-index: 99;
+      }
+      .nav-hamburger { display: flex; }
+      nav { position: relative; }
+      .hero { padding: 4rem 5vw 3.5rem; }
+      .about, .case-studies { padding: 4rem 5vw; }
+      .services { padding: 4rem 5vw; }
+      .cta-section { padding: 4rem 5vw; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="main-nav">
+  <a href="index.html" class="nav-logo">MVMD Solutions</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="photography.html">Photography</a></li>
+    <li><a href="#contact" class="btn-cta">Book a call</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <p class="eyebrow">Design · Strategy · Culture</p>
+  <h1>Your brand should work<br>as hard as <em>you do.</em></h1>
+  <p>MVMD Solutions helps small and mid-sized businesses build brand identities that are clear, consistent, and built to last — from the logo to the full creative system.</p>
+  <a href="#contact" class="btn-outline">Let's talk about your brand &rarr;</a>
+</section>
+
+<!-- ── LOGOS BAND ── -->
+<section class="logos-band">
+  <p class="label">Brands I've contributed to</p>
+  <div class="logos-track">
+    <span class="logo-pill">Knicks</span>
+    <span class="logo-pill">Chase</span>
+    <span class="logo-pill">Puma</span>
+    <span class="logo-pill">Schwinn</span>
+    <span class="logo-pill">Mount Sinai</span>
+    <span class="logo-pill">Cannondale</span>
+    <span class="logo-pill">Citi Bike</span>
+    <span class="logo-pill">VaynerMedia</span>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section class="about" id="about">
+  <div class="about-photo">
+    <img src="images/headshot.jpg" alt="Marv — founder of MVMD Solutions"
+         onerror="this.style.display='none'; this.parentElement.querySelector('.about-photo-placeholder').style.display='flex';" />
+    <div class="about-photo-placeholder" style="display:none;">Photo</div>
+  </div>
+  <div class="about-content">
+    <p class="eyebrow">About</p>
+    <h2>Built on culture.<br>Delivered with discipline.</h2>
+    <p>I'm Marv. I grew up in the culture — the kind you find on New York City streets, in the music, the sport, the way people move through this city and make things out of nothing. That's always been my reference point as a designer.</p>
+    <p>Over eight years I've taken that sensibility into boardrooms, brand strategies, and creative systems for organizations across New York — from financial exchanges in Lower Manhattan to community cycling clubs in the outer boroughs. My work sits at the intersection of creative direction, visual design, and the operational discipline to actually ship.</p>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section class="services" id="services">
+  <h2>Three ways to work together.</h2>
+  <div class="services-grid">
+
+    <div class="service-card">
+      <span class="tier-label">Tier 01</span>
+      <h3>Brand Foundation</h3>
+      <p class="price">From $2,500 &nbsp;·&nbsp; Retainer from $1,000/mo</p>
+      <p class="desc">For businesses that need a professional identity built from the ground up. You'll get a logo, color palette, typography system, brand voice guidelines, and a social media asset kit — everything you need to show up consistently across every platform.</p>
+      <a href="#contact" class="service-link">Get started &rarr;</a>
+    </div>
+
+    <div class="service-card">
+      <span class="tier-label">Tier 02</span>
+      <h3>Brand in Motion</h3>
+      <p class="price">Retainer from $2,500/mo</p>
+      <p class="desc">Everything in Brand Foundation, plus video. When your brand needs to move — event coverage, brand films, social reels — I handle creative direction, capture, and editing. This tier works best when there's room to plan together; the more lead time we have, the better the work.</p>
+      <a href="#contact" class="service-link">Get started &rarr;</a>
+    </div>
+
+    <div class="service-card">
+      <span class="tier-label">Tier 03</span>
+      <h3>Studio Mode</h3>
+      <p class="price">Retainer from $5,000/mo</p>
+      <p class="desc">For businesses that want a full creative partner, not just a vendor. I work alongside you on brand strategy, content systems, visual identity, and video — handling the creative end so you can focus on running the business. The output is consistent, the turnaround is fast, and the work is built to scale with you.</p>
+      <a href="#contact" class="service-link">Get started &rarr;</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── CASE STUDIES ── -->
+<section id="work">
+<div class="case-studies">
+  <h2>Selected work.</h2>
+  <div class="cases-grid">
+
+    <!-- Case 01: Good Co. Bike Club -->
+    <article class="case-card featured">
+      <a href="goodco.html" class="case-img" aria-label="View Good Co. Bike Club case study">
+        <div class="case-img-placeholder">
+          <span>01</span>
+        </div>
+      </a>
+      <div class="case-body">
+        <span class="case-eyebrow">Brand Identity · Web · Operations · NYC</span>
+        <h3>Good Co. Bike Club</h3>
+        <p>Built the visual identity, website, and operational infrastructure for one of NYC's most recognized cycling communities — from zero to partnerships with Schwinn, Cannondale, and Citi Bike over six years.</p>
+        <a href="goodco.html" class="case-link">View case study &rarr;</a>
+      </div>
+    </article>
+
+    <!-- Case 02: IEX Exchange Shop Program -->
+    <article class="case-card">
+      <a href="iex.html" class="case-img" aria-label="View IEX Exchange Shop Program case study">
+        <div class="case-img-placeholder">
+          <span>02</span>
+        </div>
+      </a>
+      <div class="case-body">
+        <span class="case-eyebrow">Catalogue Design · Commerce · Brand Operations · NYC</span>
+        <h3>IEX Exchange — Shop Program</h3>
+        <p>Designed a 20-page retail-grade shop catalogue and built the Shopify storefront for IEX Exchange's branded swag program, featuring a custom Nike Air Force 1 as the hero product.</p>
+        <a href="iex.html" class="case-link">View case study &rarr;</a>
+      </div>
+    </article>
+
+    <!-- Case 03: Fear the Brim -->
+    <article class="case-card">
+      <a href="fearthebrim.html" class="case-img" aria-label="View Fear the Brim case study">
+        <div class="case-img-placeholder">
+          <span>03</span>
+        </div>
+      </a>
+      <div class="case-body">
+        <span class="case-eyebrow">Web Design · Personal Brand · NYC</span>
+        <h3>Fear the Brim</h3>
+        <p>Designed and built the full website for NYC-based personal styling and custom hat brand Fear the Brim, giving an established creative with celebrity clientele a platform that matched their work.</p>
+        <a href="fearthebrim.html" class="case-link">View case study &rarr;</a>
+      </div>
+    </article>
+
+  </div>
+</div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section" id="contact">
+  <h2>Let's bring this thing <em>to life.</em></h2>
+  <p>Over eight years I've contributed creative direction and execution to activations alongside brands like the Knicks, Puma, Cannondale, and Chase — and built brands from the ground up that became something real. If you're serious about how your business shows up in the world, I'd love to be part of that. Twenty minutes is all it takes to know if we're a fit.</p>
+  <a href="mailto:marv@mvmdsolutions.com" class="btn-cta-lg">Book a free 20-min call &rarr;</a>
+  <a href="mailto:marv@mvmdsolutions.com" class="cta-secondary">or email marv@mvmdsolutions.com</a>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span class="copyright">&copy; 2026 MVMD Solutions. All rights reserved.</span>
+  <ul class="footer-links">
+    <li><a href="https://linkedin.com/in/mvmdsolutions" target="_blank" rel="noopener">LinkedIn</a></li>
+    <li><a href="https://instagram.com/mvmdsolutions" target="_blank" rel="noopener">Instagram</a></li>
+    <li><a href="mailto:marv@mvmdsolutions.com">Email</a></li>
+  </ul>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+</script>
+
+</body>
+</html>

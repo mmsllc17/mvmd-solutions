@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photography — MVMD Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;500&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F9F8F6;
+      --dark: #141414;
+      --accent: #C4771A;
+      --accent-dark: #A35F10;
+      --radius: 2px;
+      --font-head: 'Outfit', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--dark);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--bg);
+      border-bottom: 1px solid rgba(20,20,20,0.08);
+      padding: 0 5vw;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-head);
+      font-weight: 500;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      color: var(--dark);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.9rem;
+      color: var(--dark);
+      text-decoration: none;
+      opacity: 0.75;
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover { opacity: 1; }
+    .nav-links a.active { opacity: 1; color: var(--accent); }
+
+    .btn-cta {
+      display: inline-block;
+      padding: 0.55rem 1.2rem;
+      background: var(--accent);
+      color: #fff !important;
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.875rem;
+      text-decoration: none;
+      border-radius: var(--radius);
+      transition: background 0.2s;
+      white-space: nowrap;
+      opacity: 1 !important;
+    }
+
+    .btn-cta:hover { background: var(--accent-dark); }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--dark);
+      border-radius: 1px;
+      transition: 0.3s;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 5.5rem 5vw 3.5rem;
+      max-width: 800px;
+    }
+
+    .eyebrow {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+
+    .page-header h1 {
+      font-family: var(--font-head);
+      font-weight: 500;
+      font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+    }
+
+    .page-header h1 em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .page-header p {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 1.05rem;
+      color: rgba(20,20,20,0.6);
+      line-height: 1.7;
+    }
+
+    /* ── FILTER TABS ── */
+    .filter-bar {
+      padding: 1rem 5vw 1.2rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 68px;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid rgba(20,20,20,0.06);
+    }
+
+    .filter-tab {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      padding: 0.4rem 1rem;
+      border: 1.5px solid rgba(20,20,20,0.18);
+      background: transparent;
+      color: rgba(20,20,20,0.6);
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+
+    .filter-tab:hover {
+      border-color: var(--dark);
+      color: var(--dark);
+    }
+
+    .filter-tab.active {
+      background: var(--dark);
+      border-color: var(--dark);
+      color: #fff;
+    }
+
+    /* ── LOCATION SECTION ── */
+    .location-section {
+      padding: 4rem 5vw 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .location-section.hidden { display: none; }
+
+    .location-header {
+      margin-bottom: 2.2rem;
+    }
+
+    .location-eyebrow {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+
+    .location-name {
+      font-family: var(--font-head);
+      font-weight: 200;
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--dark);
+    }
+
+    .location-name strong { font-weight: 500; }
+
+    .location-count {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.78rem;
+      color: rgba(20,20,20,0.4);
+      margin-top: 0.6rem;
+    }
+
+    /* ── MASONRY GRID ── */
+    .masonry {
+      column-count: 3;
+      column-gap: 0.8rem;
+    }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 0.8rem;
+      cursor: pointer;
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      background: rgba(20,20,20,0.06);
+    }
+
+    .masonry-item img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: transform 0.4s ease, opacity 0.3s;
+      border-radius: var(--radius);
+    }
+
+    .masonry-item:hover img {
+      transform: scale(1.03);
+      opacity: 0.88;
+    }
+
+    .masonry-item .img-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem 0.9rem 0.75rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.55));
+      color: rgba(255,255,255,0.85);
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .masonry-item:hover .img-caption { opacity: 1; }
+
+    /* ── SECTION DIVIDER ── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid rgba(20,20,20,0.07);
+      margin: 1rem 5vw 0;
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(0,0,0,0.93);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lightbox-img-wrap {
+      max-width: 90vw;
+      max-height: 82vh;
+    }
+
+    .lightbox-img-wrap img {
+      max-width: 90vw;
+      max-height: 82vh;
+      object-fit: contain;
+      border-radius: var(--radius);
+      display: block;
+    }
+
+    .lightbox-caption {
+      margin-top: 1rem;
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.5);
+      font-size: 1.8rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+      padding: 0.25rem;
+    }
+
+    .lightbox-close:hover { color: #fff; }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.6);
+      font-size: 1.2rem;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: var(--radius);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .lightbox-nav:hover {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+    }
+
+    .lightbox-prev { left: 1.2rem; }
+    .lightbox-next { right: 1.2rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 1.8rem 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 5rem;
+    }
+
+    footer .copyright {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.8rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .masonry { column-count: 2; }
+    }
+
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        border-bottom: 1px solid rgba(20,20,20,0.08);
+        padding: 1.5rem 5vw 2rem;
+        gap: 1.2rem;
+        z-index: 99;
+      }
+      .nav-hamburger { display: flex; }
+      nav { position: relative; }
+      .page-header { padding: 3rem 5vw 2rem; }
+      .masonry { column-count: 2; column-gap: 0.5rem; }
+      .masonry-item { margin-bottom: 0.5rem; }
+      .location-name { font-size: 2.6rem; }
+      .lightbox-prev { left: 0.4rem; }
+      .lightbox-next { right: 0.4rem; }
+    }
+
+    @media (max-width: 420px) {
+      .masonry { column-count: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="main-nav">
+  <a href="index.html" class="nav-logo">MVMD Solutions</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="photography.html" class="active">Photography</a></li>
+    <li><a href="index.html#contact" class="btn-cta">Book a call</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── PAGE HEADER ── -->
+<header class="page-header">
+  <p class="eyebrow">Photography</p>
+  <h1>The places I've been.<br>The things <em>I noticed.</em></h1>
+  <p>A personal archive of travel and life — shot on the road, at events, and everywhere in between.</p>
+</header>
+
+<!-- ── FILTER TABS ── -->
+<div class="filter-bar" role="tablist" aria-label="Filter by location">
+  <button class="filter-tab active" data-filter="all"            role="tab" aria-selected="true">All</button>
+  <button class="filter-tab"        data-filter="france"         role="tab" aria-selected="false">France</button>
+  <button class="filter-tab"        data-filter="uk"             role="tab" aria-selected="false">United Kingdom</button>
+  <button class="filter-tab"        data-filter="brazil"         role="tab" aria-selected="false">Brazil</button>
+  <button class="filter-tab"        data-filter="germany"        role="tab" aria-selected="false">Germany</button>
+  <button class="filter-tab"        data-filter="spain"          role="tab" aria-selected="false">Spain</button>
+</div>
+
+<!-- ═══════════════════════════════════════
+     FRANCE — 28 photos
+════════════════════════════════════════ -->
+<section class="location-section" data-location="france" id="section-france">
+  <div class="location-header">
+    <p class="location-eyebrow">Europe &middot; France</p>
+    <h2 class="location-name"><span>Paris, Nice, Antibes,</span><br><strong>Cannes, Eze &amp; Monaco</strong></h2>
+    <p class="location-count">28 photos</p>
+  </div>
+  <div class="masonry" id="masonry-france">
+
+    <div class="masonry-item" data-src="images/France/01.jpg" data-caption="France">
+      <img src="images/France/01.jpg" alt="France — 01" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/02.jpg" data-caption="France">
+      <img src="images/France/02.jpg" alt="France — 02" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/03.jpg" data-caption="France">
+      <img src="images/France/03.jpg" alt="France — 03" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/04.jpg" data-caption="France">
+      <img src="images/France/04.jpg" alt="France — 04" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/05.jpg" data-caption="France">
+      <img src="images/France/05.jpg" alt="France — 05" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/06.jpg" data-caption="France">
+      <img src="images/France/06.jpg" alt="France — 06" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/07.jpg" data-caption="France">
+      <img src="images/France/07.jpg" alt="France — 07" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/08.jpg" data-caption="France">
+      <img src="images/France/08.jpg" alt="France — 08" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/09.jpg" data-caption="France">
+      <img src="images/France/09.jpg" alt="France — 09" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/10.jpg" data-caption="France">
+      <img src="images/France/10.jpg" alt="France — 10" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/11.jpg" data-caption="France">
+      <img src="images/France/11.jpg" alt="France — 11" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/12.jpg" data-caption="France">
+      <img src="images/France/12.jpg" alt="France — 12" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/13.jpg" data-caption="France">
+      <img src="images/France/13.jpg" alt="France — 13" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/14.jpg" data-caption="France">
+      <img src="images/France/14.jpg" alt="France — 14" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/15.jpg" data-caption="France">
+      <img src="images/France/15.jpg" alt="France — 15" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/16.jpg" data-caption="France">
+      <img src="images/France/16.jpg" alt="France — 16" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/17.jpg" data-caption="France">
+      <img src="images/France/17.jpg" alt="France — 17" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/18.jpg" data-caption="France">
+      <img src="images/France/18.jpg" alt="France — 18" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/19.jpg" data-caption="France">
+      <img src="images/France/19.jpg" alt="France — 19" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/20.jpg" data-caption="France">
+      <img src="images/France/20.jpg" alt="France — 20" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/21.jpg" data-caption="France">
+      <img src="images/France/21.jpg" alt="France — 21" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/22.jpg" data-caption="France">
+      <img src="images/France/22.jpg" alt="France — 22" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/23.jpg" data-caption="France">
+      <img src="images/France/23.jpg" alt="France — 23" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/24.jpg" data-caption="France">
+      <img src="images/France/24.jpg" alt="France — 24" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/25.jpg" data-caption="France">
+      <img src="images/France/25.jpg" alt="France — 25" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/26.jpg" data-caption="France">
+      <img src="images/France/26.jpg" alt="France — 26" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/27.jpg" data-caption="France">
+      <img src="images/France/27.jpg" alt="France — 27" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+    <div class="masonry-item" data-src="images/France/28.jpg" data-caption="France">
+      <img src="images/France/28.jpg" alt="France — 28" loading="lazy" decoding="async" />
+      <div class="img-caption">France</div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider" data-divider="france" />
+
+<!-- ═══════════════════════════════════════
+     UNITED KINGDOM — 5 photos
+════════════════════════════════════════ -->
+<section class="location-section" data-location="uk" id="section-uk">
+  <div class="location-header">
+    <p class="location-eyebrow">Europe &middot; United Kingdom</p>
+    <h2 class="location-name"><strong>London</strong></h2>
+    <p class="location-count">5 photos</p>
+  </div>
+  <div class="masonry" id="masonry-uk">
+
+    <div class="masonry-item" data-src="images/UK/01.jpg" data-caption="London, UK">
+      <img src="images/UK/01.jpg" alt="London — 01" loading="lazy" decoding="async" />
+      <div class="img-caption">London, UK</div>
+    </div>
+    <div class="masonry-item" data-src="images/UK/02.jpg" data-caption="London, UK">
+      <img src="images/UK/02.jpg" alt="London — 02" loading="lazy" decoding="async" />
+      <div class="img-caption">London, UK</div>
+    </div>
+    <div class="masonry-item" data-src="images/UK/03.jpg" data-caption="London, UK">
+      <img src="images/UK/03.jpg" alt="London — 03" loading="lazy" decoding="async" />
+      <div class="img-caption">London, UK</div>
+    </div>
+    <div class="masonry-item" data-src="images/UK/04.jpg" data-caption="London, UK">
+      <img src="images/UK/04.jpg" alt="London — 04" loading="lazy" decoding="async" />
+      <div class="img-caption">London, UK</div>
+    </div>
+    <div class="masonry-item" data-src="images/UK/05.jpg" data-caption="London, UK">
+      <img src="images/UK/05.jpg" alt="London — 05" loading="lazy" decoding="async" />
+      <div class="img-caption">London, UK</div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider" data-divider="uk" />
+
+<!-- ═══════════════════════════════════════
+     BRAZIL — 12 photos
+════════════════════════════════════════ -->
+<section class="location-section" data-location="brazil" id="section-brazil">
+  <div class="location-header">
+    <p class="location-eyebrow">South America &middot; Brazil</p>
+    <h2 class="location-name"><span>São Paulo</span><br><strong>&amp; Rio de Janeiro</strong></h2>
+    <p class="location-count">12 photos</p>
+  </div>
+  <div class="masonry" id="masonry-brazil">
+
+    <div class="masonry-item" data-src="images/Brazil/01.jpg" data-caption="Brazil">
+      <img src="images/Brazil/01.jpg" alt="Brazil — 01" loading="lazy" decoding="async" />
+      <div class="img-caption">Brazil</div>
+    </div>
+    <div class="masonry-item" data-src="images/Brazil/02.jpg" data-caption="Brazil">
+      <img src="images/Brazil/02.jpg" alt="Brazil — 02" loading="lazy" decoding="async" />
+      <div class="img-caption">Brazil</div>
+    </div>
+    <div class="masonry-item" data-src="images/Brazil/03.jpg" data-caption="Brazil">
+      <img src="images/Brazil/03.jpg" alt="Brazil — 03" loading="lazy" decoding="async" />
+      <div class="img-caption">Brazil</div>
+    </div>
+    <div class="masonry-item" data-src="images/Brazil/04.jpg" data-caption="Brazil">
+      <img src="images/Brazil/04.jpg" alt="Brazil — 04" loading="lazy" decoding="async" />
+      <div class="img-caption">Brazil</div>
+    </div>
+    <div class="masonry-item" data-src="images/Brazil/05.jpg" data-caption="Brazil">
+      <img src="images/Brazil/05.jpg" alt="Brazil — 05" loading="lazy" decoding="async" />
+      <div class="img-caption">Brazil</div>
+    </div>
+    <div class="masonry-item" data-src="images/Brazil/06.jpg" data-caption="Brazil">
+      <img src="images/Brazil/06.jpg" alt="Brazil — 06" loading="lazy" decoding="async" />
+      <div class="img-caption">Brazil</div>
+    </div>
+    <div class="masonry-item" data-src="images/Brazil/07.jpg" data-caption="Brazil">
+      <img src="images/Brazil/07.jpg" alt="Brazil — 07" loading="lazy" decoding="async" />
+      <div class="img-caption">Brazil</div>
+    </div>
+    <div class="masonry-item" data-src="images/Brazil/08.jpg" data-caption="Brazil">
+      <img src="images/Brazil/08.jpg" alt="Brazil — 08" loading="lazy" decoding="async" />
+      <div class="img-caption">Brazil</div>
+    </div>
+    <div class="masonry-item" data-src="images/Brazil/09.jpg" data-caption="Brazil">
+      <img src="images/Brazil/09.jpg" alt="Brazil — 09" loading="lazy" decoding="async" />
+      <div class="img-caption">Brazil</div>
+    </div>
+    <div class="masonry-item" data-src="images/Brazil/10.jpg" data-caption="Brazil">
+      <img src="images/Brazil/10.jpg" alt="Brazil — 10" loading="lazy" decoding="async" />
+      <div class="img-caption">Brazil</div>
+    </div>
+    <div class="masonry-item" data-src="images/Brazil/11.jpg" data-caption="Brazil">
+      <img src="images/Brazil/11.jpg" alt="Brazil — 11" loading="lazy" decoding="async" />
+      <div class="img-caption">Brazil</div>
+    </div>
+    <div class="masonry-item" data-src="images/Brazil/12.jpg" data-caption="Brazil">
+      <img src="images/Brazil/12.jpg" alt="Brazil — 12" loading="lazy" decoding="async" />
+      <div class="img-caption">Brazil</div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider" data-divider="brazil" />
+
+<!-- ═══════════════════════════════════════
+     GERMANY — 9 photos
+════════════════════════════════════════ -->
+<section class="location-section" data-location="germany" id="section-germany">
+  <div class="location-header">
+    <p class="location-eyebrow">Europe &middot; Germany</p>
+    <h2 class="location-name"><strong>Berlin</strong></h2>
+    <p class="location-count">9 photos</p>
+  </div>
+  <div class="masonry" id="masonry-germany">
+
+    <div class="masonry-item" data-src="images/Germany/01.jpg" data-caption="Germany">
+      <img src="images/Germany/01.jpg" alt="Germany — 01" loading="lazy" decoding="async" />
+      <div class="img-caption">Germany</div>
+    </div>
+    <div class="masonry-item" data-src="images/Germany/02.jpg" data-caption="Germany">
+      <img src="images/Germany/02.jpg" alt="Germany — 02" loading="lazy" decoding="async" />
+      <div class="img-caption">Germany</div>
+    </div>
+    <div class="masonry-item" data-src="images/Germany/03.jpg" data-caption="Germany">
+      <img src="images/Germany/03.jpg" alt="Germany — 03" loading="lazy" decoding="async" />
+      <div class="img-caption">Germany</div>
+    </div>
+    <div class="masonry-item" data-src="images/Germany/04.jpg" data-caption="Germany">
+      <img src="images/Germany/04.jpg" alt="Germany — 04" loading="lazy" decoding="async" />
+      <div class="img-caption">Germany</div>
+    </div>
+    <div class="masonry-item" data-src="images/Germany/05.jpg" data-caption="Germany">
+      <img src="images/Germany/05.jpg" alt="Germany — 05" loading="lazy" decoding="async" />
+      <div class="img-caption">Germany</div>
+    </div>
+    <div class="masonry-item" data-src="images/Germany/06.jpg" data-caption="Germany">
+      <img src="images/Germany/06.jpg" alt="Germany — 06" loading="lazy" decoding="async" />
+      <div class="img-caption">Germany</div>
+    </div>
+    <div class="masonry-item" data-src="images/Germany/07.jpg" data-caption="Germany">
+      <img src="images/Germany/07.jpg" alt="Germany — 07" loading="lazy" decoding="async" />
+      <div class="img-caption">Germany</div>
+    </div>
+    <div class="masonry-item" data-src="images/Germany/08.jpg" data-caption="Germany">
+      <img src="images/Germany/08.jpg" alt="Germany — 08" loading="lazy" decoding="async" />
+      <div class="img-caption">Germany</div>
+    </div>
+    <div class="masonry-item" data-src="images/Germany/09.jpg" data-caption="Germany">
+      <img src="images/Germany/09.jpg" alt="Germany — 09" loading="lazy" decoding="async" />
+      <div class="img-caption">Germany</div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="section-divider" data-divider="germany" />
+
+<!-- ═══════════════════════════════════════
+     SPAIN — 10 photos (01–04, 06–11; no 05.jpg)
+════════════════════════════════════════ -->
+<section class="location-section" data-location="spain" id="section-spain">
+  <div class="location-header">
+    <p class="location-eyebrow">Europe &middot; Spain</p>
+    <h2 class="location-name"><span>Barcelona</span><br><strong>&amp; Madrid</strong></h2>
+    <p class="location-count">10 photos</p>
+  </div>
+  <div class="masonry" id="masonry-spain">
+
+    <div class="masonry-item" data-src="images/Spain/01.jpg" data-caption="Spain">
+      <img src="images/Spain/01.jpg" alt="Spain — 01" loading="lazy" decoding="async" />
+      <div class="img-caption">Spain</div>
+    </div>
+    <div class="masonry-item" data-src="images/Spain/02.jpg" data-caption="Spain">
+      <img src="images/Spain/02.jpg" alt="Spain — 02" loading="lazy" decoding="async" />
+      <div class="img-caption">Spain</div>
+    </div>
+    <div class="masonry-item" data-src="images/Spain/03.jpg" data-caption="Spain">
+      <img src="images/Spain/03.jpg" alt="Spain — 03" loading="lazy" decoding="async" />
+      <div class="img-caption">Spain</div>
+    </div>
+    <div class="masonry-item" data-src="images/Spain/04.jpg" data-caption="Spain">
+      <img src="images/Spain/04.jpg" alt="Spain — 04" loading="lazy" decoding="async" />
+      <div class="img-caption">Spain</div>
+    </div>
+    <div class="masonry-item" data-src="images/Spain/06.jpg" data-caption="Spain">
+      <img src="images/Spain/06.jpg" alt="Spain — 06" loading="lazy" decoding="async" />
+      <div class="img-caption">Spain</div>
+    </div>
+    <div class="masonry-item" data-src="images/Spain/07.jpg" data-caption="Spain">
+      <img src="images/Spain/07.jpg" alt="Spain — 07" loading="lazy" decoding="async" />
+      <div class="img-caption">Spain</div>
+    </div>
+    <div class="masonry-item" data-src="images/Spain/08.jpg" data-caption="Spain">
+      <img src="images/Spain/08.jpg" alt="Spain — 08" loading="lazy" decoding="async" />
+      <div class="img-caption">Spain</div>
+    </div>
+    <div class="masonry-item" data-src="images/Spain/09.jpg" data-caption="Spain">
+      <img src="images/Spain/09.jpg" alt="Spain — 09" loading="lazy" decoding="async" />
+      <div class="img-caption">Spain</div>
+    </div>
+    <div class="masonry-item" data-src="images/Spain/10.jpg" data-caption="Spain">
+      <img src="images/Spain/10.jpg" alt="Spain — 10" loading="lazy" decoding="async" />
+      <div class="img-caption">Spain</div>
+    </div>
+    <div class="masonry-item" data-src="images/Spain/11.jpg" data-caption="Spain">
+      <img src="images/Spain/11.jpg" alt="Spain — 11" loading="lazy" decoding="async" />
+      <div class="img-caption">Spain</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── LIGHTBOX ── -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lightbox-close" id="lb-close" aria-label="Close">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lb-prev" aria-label="Previous photo">&#8592;</button>
+  <div class="lightbox-img-wrap">
+    <img id="lb-img" src="" alt="" />
+  </div>
+  <p class="lightbox-caption" id="lb-caption"></p>
+  <button class="lightbox-nav lightbox-next" id="lb-next" aria-label="Next photo">&#8594;</button>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span class="copyright">&copy; 2026 MVMD Solutions. All rights reserved.</span>
+  <ul class="footer-links">
+    <li><a href="https://linkedin.com/in/mvmdsolutions" target="_blank" rel="noopener">LinkedIn</a></li>
+    <li><a href="https://instagram.com/mvmdsolutions" target="_blank" rel="noopener">Instagram</a></li>
+    <li><a href="mailto:marv@mvmdsolutions.com">Email</a></li>
+  </ul>
+</footer>
+
+<script>
+(function () {
+
+  /* ── Nav hamburger ── */
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('nav-links');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  /* ── Wire masonry click handlers ── */
+  document.querySelectorAll('.masonry').forEach(grid => {
+    const items = Array.from(grid.querySelectorAll('.masonry-item'));
+    items.forEach((item, index) => {
+      item.addEventListener('click', () => openLightbox(grid.id, index));
+    });
+  });
+
+  /* ── Lightbox ── */
+  const lightbox = document.getElementById('lightbox');
+  const lbImg    = document.getElementById('lb-img');
+  const lbCap    = document.getElementById('lb-caption');
+  const lbClose  = document.getElementById('lb-close');
+  const lbPrev   = document.getElementById('lb-prev');
+  const lbNext   = document.getElementById('lb-next');
+
+  let currentGridId = null;
+  let currentIndex  = 0;
+
+  function getItems(gridId) {
+    return Array.from(document.querySelectorAll(`#${gridId} .masonry-item`));
+  }
+
+  function openLightbox(gridId, index) {
+    const items = getItems(gridId);
+    if (!items.length) return;
+    currentGridId = gridId;
+    currentIndex  = index;
+    showImage(items[index]);
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function showImage(item) {
+    lbImg.src         = item.dataset.src;
+    lbImg.alt         = item.querySelector('img') ? item.querySelector('img').alt : '';
+    lbCap.textContent = item.dataset.caption || '';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+  }
+
+  function navigate(dir) {
+    const items = getItems(currentGridId);
+    currentIndex = (currentIndex + dir + items.length) % items.length;
+    showImage(items[currentIndex]);
+  }
+
+  lbClose.addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click',  () => navigate(-1));
+  lbNext.addEventListener('click',  () => navigate(1));
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowLeft')  navigate(-1);
+    if (e.key === 'ArrowRight') navigate(1);
+  });
+
+  /* ── Filter tabs ── */
+  const filterTabs = document.querySelectorAll('.filter-tab');
+  const sections   = document.querySelectorAll('.location-section');
+  const dividers   = document.querySelectorAll('.section-divider');
+
+  filterTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      filterTabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+
+      const filter = tab.dataset.filter;
+
+      sections.forEach(section => {
+        const visible = filter === 'all' || section.dataset.location === filter;
+        section.classList.toggle('hidden', !visible);
+      });
+
+      dividers.forEach(div => {
+        const paired = document.querySelector(`.location-section[data-location="${div.dataset.divider}"]`);
+        div.style.display = (!paired || paired.classList.contains('hidden')) ? 'none' : '';
+      });
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>
