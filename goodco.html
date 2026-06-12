@@ -84,13 +84,15 @@
     .dark-card .visual-card-label { color: rgba(255,255,255,0.2); }
     .visual-card-url { font-family: var(--font-body); font-weight: 300; font-size: 0.72rem; color: rgba(20,20,20,0.22); letter-spacing: 0.04em; }
     .visual-card img.logo-img { max-width: 55%; max-height: 38%; object-fit: contain; margin-bottom: 0.5rem; }
-    .photo-soon { font-family: var(--font-body); font-weight: 300; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(20,20,20,0.18); margin-top: 0.6rem; }
+    .visual-card.has-img { padding: 0; }
+    .visual-card.has-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     .pills-section { margin-top: 2.5rem; }
     .pills-row-label { font-family: var(--font-body); font-weight: 400; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.7rem; margin-top: 1.8rem; }
     .pills-row-label:first-child { margin-top: 0; }
     .pill-group { display: flex; flex-wrap: wrap; gap: 0.45rem; }
     .pill { font-family: var(--font-body); font-weight: 300; font-size: 0.8rem; padding: 0.35rem 0.95rem; border: 1.5px solid rgba(20,20,20,0.15); border-radius: 999px; color: rgba(20,20,20,0.6); }
+    .pill.pill-accent { border-color: var(--accent); color: var(--accent); }
 
     /* ── PULL QUOTE ── */
     .pull-quote-section { background: var(--dark); padding: 6rem 5vw; text-align: center; }
@@ -217,6 +219,10 @@
       <p class="stat-number">3</p>
       <p class="stat-label">corporate<br>partnerships</p>
     </div>
+    <div class="stat">
+      <p class="stat-number">2</p>
+      <p class="stat-label">grants<br>awarded</p>
+    </div>
   </div>
 </section>
 
@@ -235,10 +241,7 @@
           <p>Good Co. Bike Club launched in June 2020 with a clear sense of purpose and a growing community of riders. What it didn't have was a brand. No logo, no visual system, no website. Nothing that could communicate who they were to the outside world or give the community something to rally around.</p>
           <p>My job as Chief Creative Officer was to build all of it from day one. The identity, the platform, and the operational infrastructure that would let the brand grow without breaking.</p>
         </div>
-        <div class="act-visual">
-          <span class="act-visual-num">01</span>
-          <span class="photo-soon">Photo coming soon</span>
-        </div>
+        <img src="images/goodco/01.jpg" alt="Good Co. Bike Club" style="width:100%;height:100%;object-fit:cover;border-radius:2px;display:block;" />
       </div>
     </div>
 
@@ -253,18 +256,14 @@
         <p>The website wasn't just design, it was infrastructure. Event creation, RSVP systems, a merch store, and community presence all ran through the platform I built and maintained throughout the club's growth.</p>
       </div>
       <div class="act-layout three-col">
-        <div class="visual-card">
-          <span class="visual-card-label">Creative direction</span>
-          <span class="photo-soon">Photo coming soon</span>
+        <div class="visual-card has-img">
+          <img src="images/goodco/02.jpg" alt="Good Co. creative direction" />
         </div>
-        <div class="visual-card dark-card">
-          <img src="images/goodco-logo.png" alt="Good Co. Bike Club logo" class="logo-img" onerror="this.style.display='none'" />
-          <span class="visual-card-label">Good Co. identity system</span>
+        <div class="visual-card dark-card" style="display:flex;align-items:center;justify-content:center;">
+          <img src="images/goodco/goodco-logo.png" alt="Good Co. Bike Club logo" style="max-width:60%;object-fit:contain;display:block;" />
         </div>
-        <div class="visual-card">
-          <span class="visual-card-url">goodcobikeclub.com</span>
-          <span class="visual-card-label">Website design and build</span>
-          <span class="photo-soon">Photo coming soon</span>
+        <div class="visual-card has-img">
+          <img src="images/goodco/03.jpg" alt="Good Co. website" />
         </div>
       </div>
     </div>
@@ -294,6 +293,11 @@
           <span class="pill">Curbed</span>
           <span class="pill">NYC Tourism</span>
           <span class="pill">Better Bike Share</span>
+        </div>
+        <p class="pills-row-label">Grants</p>
+        <div class="pill-group">
+          <span class="pill pill-accent">Hinge — One More Hour</span>
+          <span class="pill pill-accent">Knicks x Chase Small Business Roster</span>
         </div>
       </div>
     </div>
